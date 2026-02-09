@@ -2,15 +2,15 @@ class Solution {
 public:
     vector<int> asteroidCollision(vector<int>& asteroids) {
         stack<int> st;
-
-        for (int a : asteroids) {
+    int n = asteroids.size();
+        for (int i=0;i<n;i++) {
             bool destroyed = false;
 
-            while (!st.empty() && a < 0 && st.top() > 0) {
-                if (abs(a) > st.top()) {
+            while (!st.empty() && asteroids[i] < 0 && st.top() > 0) {
+                if (abs(asteroids[i]) > st.top()) {
                     st.pop();              // right asteroid destroyed
                 }
-                else if (abs(a) == st.top()) {
+                else if (abs(asteroids[i]) == st.top()) {
                     st.pop();              // both destroyed
                     destroyed = true;
                     break;
@@ -22,7 +22,7 @@ public:
             }
 
             if (!destroyed) {
-                st.push(a);
+                st.push(asteroids[i]);
             }
         }
 
